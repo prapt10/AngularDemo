@@ -1,0 +1,39 @@
+<h4>Employee <code>List</code></h4>
+<hr>
+<div class="form-group form-inline d-block">
+    Search:
+    <input class="form-control ml-2" type="text" [(ngModel)]="filter" (keyup)="refreshEmployee()" />
+    <button type="button" class="btn btn-light mr-2 toggle-code float-right" routerLink="/employee/add"><span>New</span></button>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col" sortable="employee_name" (sort)="onSort($event)">Name</th>
+            <th scope="col" sortable="employee_salary" (sort)="onSort($event)">Salary</th>
+            <th scope="col" sortable="employee_age" (sort)="onSort($event)">Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees; index as i">
+            <th scope="row">{{ employee.id }}</th>
+            <td>{{ employee.employee_name }}</td>
+            <td>{{ employee.employee_salary | number : '1.2-2' }}</td>
+            <td>{{ employee.employee_age | number }}</td>
+        </tr>
+        <tr *ngIf="employees?.length === 0">
+            No record found.
+        </tr>
+    </tbody>
+</table>
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="refreshEmployee()" [maxSize]="3" [rotate]="true" [boundaryLinks]="true">
+    </ngb-pagination>
+    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshEmployee()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+    </select>
+</div>
+<pre>Current page: {{page}}</pre>
