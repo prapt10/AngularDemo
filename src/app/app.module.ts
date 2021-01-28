@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './auth/login/login.component';
+import { NgxContentLoadingModule } from 'ngx-content-loading';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LoginComponent } from './auth/login/login.component';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    NgxContentLoadingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
